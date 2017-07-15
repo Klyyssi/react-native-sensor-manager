@@ -20,6 +20,7 @@ public class SensorManagerModule extends ReactContextBaseJavaModule {
 	private OrientationRecord		mOrientationRecord = null;
 	private ProximityRecord			mProximityRecord = null;
   private LightSensorRecord   mLightSensorRecord = null;
+  private RotationVectorRecord  mRotationVectorRecord = null;
 
 	private ReactApplicationContext	mReactContext;
 
@@ -57,6 +58,19 @@ public class SensorManagerModule extends ReactContextBaseJavaModule {
     public void stopGyroscope() {
 		if (mGyroscopeRecord != null)
 			mGyroscopeRecord.stop();
+    }
+
+    @ReactMethod
+    public int startRotationVector(int delay) {
+		if (mRotationVectorRecord == null)
+			mRotationVectorRecord = new RotationVectorRecord(mReactContext);
+		return (mRotationVectorRecord.start(delay));
+    }
+
+    @ReactMethod
+    public void stopRotationVector() {
+		if (mRotationVectorRecord != null)
+			mRotationVectorRecord.stop();
     }
 
     @ReactMethod
